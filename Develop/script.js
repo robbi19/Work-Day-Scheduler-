@@ -46,8 +46,42 @@ $(document).ready(function(){
       newInput.addClass("present");
     } else newInput.addClass("future");
 
-    //https://youtu.be/TrGI9Yki-24//
-    //Appending new elements to the DOM//
+    //https://youtu.be/TrGI9Yki-24//Appending new elements to the DOM//
     newDiv.append(newP, newInput, newBtn);
     $(".container").append(newDiv);
   }
+
+  const createEvent = (rowId) => {
+    // create text section
+   var  textAreaEl = $("<textarea>");
+   textAreaEl.val("enter your event");
+
+   textAreaEl.focus();
+
+   // append section//
+   $("#" + rowId).append(textAreaEl);
+
+};
+
+   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify/
+
+   //  save button by clicking /Store local//
+   $(".saveBtn").on("click", function () {
+    var masterInputs = [];
+    for (var i = 9; i < 18; i++) {
+      var userInput = $("#" + i).val();
+      masterInputs.push(userInput);
+    }
+    localStorage.setItem("savedTasks", JSON.stringify(masterInputs));
+  });
+
+   //  local = refreshed
+   var storedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+  console.log(storedTasks);
+
+   // Set  into the input values
+   for (i = 0; i < storedTasks.length; i++) {
+    // Set the storedTasks input values
+    $("#" + (i + 9)).val(storedTasks[i]);
+  }
+}) 
