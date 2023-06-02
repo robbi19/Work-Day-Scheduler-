@@ -39,3 +39,15 @@ $(document).ready(function(){
  newP.addClass("col-sm-1 time-block hour");
  newP.text(hour[i]);
 
+// key :less=past, present=present, greater=future//
+    if (militaryTimes[i] < currentHour) {
+      newInput.addClass("past");
+    } else if (militaryTimes[i] === currentHour) {
+      newInput.addClass("present");
+    } else newInput.addClass("future");
+
+    //https://youtu.be/TrGI9Yki-24//
+    //Appending new elements to the DOM//
+    newDiv.append(newP, newInput, newBtn);
+    $(".container").append(newDiv);
+  }
